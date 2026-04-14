@@ -39,4 +39,4 @@ def resume_step(checkpoint: str, scheduler) -> int:
 
 def load_weights(model, checkpoint: str) -> None:
     state = load_file(str(Path(checkpoint) / "model.safetensors"), device="cpu")
-    model.load_state_dict(state)
+    model.load_state_dict(state, strict=False)

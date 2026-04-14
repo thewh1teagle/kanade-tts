@@ -1,5 +1,5 @@
 uv run src/infer.py \
-    --checkpoint "${1:?Usage: train_infer.sh <checkpoint>}" \
-    --reference dataset/he/wav/0.wav \
+    --checkpoint "${1:?Usage: train_infer.sh <checkpoint> [reference]}" \
+    --reference "${2:-dataset/he/wav/0.wav}" \
     --ipa "hakˈoaχ leʃanˈot matχˈil baʁˈeɡa ʃebˈo ʔatˈa maʔamˈin ʃezˈe ʔefʃaʁˈi." \
     --output audio.wav

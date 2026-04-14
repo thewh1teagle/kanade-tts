@@ -24,6 +24,8 @@ def parse_args():
     parser.add_argument("--ipa", type=str, required=True)
     parser.add_argument("--output", type=str, default="/tmp/kanade_out.wav")
     parser.add_argument("--max-new-tokens", type=int, default=512)
+    parser.add_argument("--temperature", type=float, default=None)
+    parser.add_argument("--top-p", type=float, default=None)
     return parser.parse_args()
 
 
@@ -58,11 +60,14 @@ def main():
     attention_mask = torch.ones_like(input_ids)
 
     with torch.inference_mode():
+        do_sample = args.temperature is not None or args.top_p is not None
         generated = model.generate(
             input_ids=input_ids,
             attention_mask=attention_mask,
             max_new_tokens=args.max_new_tokens,
-            do_sample=False,
+            do_sample=do_sample,
+            temperature=args.temperature,
+            top_p=args.top_p,
         )
         audio_tokens = strip_special_tokens(generated[0])
         mel = kanade.decode(
