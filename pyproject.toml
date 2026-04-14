@@ -1,0 +1,18 @@
+[project]
+name = "kanade-tts"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "accelerate>=1.13.0",
+    "huggingface-hub>=1.10.2",
+    "kanade-tokenizer",
+    "renikud-onnx>=0.1.0",
+    "tensorboard>=2.20.0",
+    "tqdm>=4.67.3",
+    "transformers>=5.5.4",
+]
+
+[tool.uv.sources]
+kanade-tokenizer = { git = "https://github.com/frothywater/kanade-tokenizer" }
